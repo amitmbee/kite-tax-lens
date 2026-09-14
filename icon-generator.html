@@ -1,0 +1,276 @@
+<title>Kite Tax Lens — Icon Generator</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 13px;
+    background: #0f1117;
+    color: #e0e6f0;
+    padding: 36px 28px 56px;
+    min-height: 100vh;
+  }
+  h1 { font-size: 17px; font-weight: 700; margin-bottom: 4px; color: #fff; }
+  .sub { color: #5a6a82; font-size: 12px; margin-bottom: 32px; }
+
+  .previews {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .panel {
+    border-radius: 10px;
+    padding: 28px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+  }
+  .light { background: #ffffff; }
+  .dark  { background: #1a1f2e; border: 1px solid #2a3248; }
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+  }
+  .lbl {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    color: #4a5568;
+  }
+  .dark .lbl { color: #3a4a60; }
+
+  canvas { display: block; }
+
+  .section-title {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #3a4a60;
+    margin-bottom: 10px;
+  }
+
+  .cards { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  .card {
+    background: #161b27;
+    border: 1px solid #232b3e;
+    border-radius: 8px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .card-meta { display: flex; flex-direction: column; gap: 3px; }
+  .card-name { font-weight: 600; font-size: 13px; color: #c8d4e8; }
+  .card-spec { font-size: 11px; color: #3a4a60; }
+
+  button {
+    background: #2d6bc4;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 7px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: .02em;
+    white-space: nowrap;
+  }
+  button:hover { background: #2458a8; }
+
+  .note {
+    margin-top: 24px;
+    font-size: 11px;
+    color: #3a4a60;
+    line-height: 1.7;
+    background: #161b27;
+    border: 1px solid #232b3e;
+    border-radius: 8px;
+    padding: 14px 18px;
+  }
+  .note code {
+    background: #0f1117;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-family: ui-monospace, monospace;
+    color: #7a9fd4;
+    font-size: 11px;
+  }
+</style>
+
+<h1>🍃 Kite Tax Lens — Icon Generator</h1>
+<p class="sub">Magnifying glass + ₹ · Zerodha blue · works on light and dark</p>
+
+<div class="section-title">Preview</div>
+<div class="previews">
+  <div class="panel light">
+    <div class="item">
+      <canvas id="pl128" width="128" height="128"></canvas>
+      <span class="lbl">128px</span>
+    </div>
+    <div class="item">
+      <canvas id="pl48" width="96" height="96"></canvas>
+      <span class="lbl">48px (2×)</span>
+    </div>
+    <div class="item">
+      <canvas id="pl16" width="48" height="48"></canvas>
+      <span class="lbl">16px (3×)</span>
+    </div>
+  </div>
+  <div class="panel dark">
+    <div class="item">
+      <canvas id="pd128" width="128" height="128"></canvas>
+      <span class="lbl">128px</span>
+    </div>
+    <div class="item">
+      <canvas id="pd48" width="96" height="96"></canvas>
+      <span class="lbl">48px (2×)</span>
+    </div>
+    <div class="item">
+      <canvas id="pd16" width="48" height="48"></canvas>
+      <span class="lbl">16px (3×)</span>
+    </div>
+  </div>
+</div>
+
+<div class="section-title">Download</div>
+<div class="cards">
+  <div class="card">
+    <canvas id="d128" width="128" height="128" style="display:none"></canvas>
+    <div class="card-meta">
+      <span class="card-name">icon128.png</span>
+      <span class="card-spec">128×128 · Chrome Web Store</span>
+    </div>
+    <button onclick="dl('d128','icon128.png')">Download</button>
+  </div>
+  <div class="card">
+    <canvas id="d48" width="48" height="48" style="display:none"></canvas>
+    <div class="card-meta">
+      <span class="card-name">icon48.png</span>
+      <span class="card-spec">48×48 · Extensions page</span>
+    </div>
+    <button onclick="dl('d48','icon48.png')">Download</button>
+  </div>
+  <div class="card">
+    <canvas id="d16" width="16" height="16" style="display:none"></canvas>
+    <div class="card-meta">
+      <span class="card-name">icon16.png</span>
+      <span class="card-spec">16×16 · Toolbar</span>
+    </div>
+    <button onclick="dl('d16','icon16.png')">Download</button>
+  </div>
+</div>
+
+<div class="note">
+  After downloading, replace the files in your <code>icons/</code> folder then run:<br>
+  <code>git add icons/ && git commit -m "Update extension icons" && git push</code><br>
+  Then rebuild the ZIP and re-upload to the Chrome Web Store.
+</div>
+
+<script>
+function drawIcon(canvas, size) {
+  const ctx = canvas.getContext('2d');
+  canvas.width  = size;
+  canvas.height = size;
+  ctx.clearRect(0, 0, size, size);
+
+  const s  = size / 128;   // scale factor
+  const lw = 10 * s;       // stroke weight
+  const color = '#2d6bc4';
+
+  // ── Circle (lens) ───────────────────────────────────
+  // Center at (52,52), radius 30 — in 128px space
+  const cx = 52 * s;
+  const cy = 52 * s;
+  const r  = 30 * s;
+
+  ctx.save();
+  if (size >= 48) {
+    // Subtle white glow for dark bg visibility
+    ctx.shadowColor = 'rgba(255,255,255,0.55)';
+    ctx.shadowBlur  = 4 * s;
+  }
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, 0, Math.PI * 2);
+  ctx.strokeStyle = color;
+  ctx.lineWidth   = lw;
+  ctx.stroke();
+  ctx.restore();
+
+  // ── Handle ──────────────────────────────────────────
+  // From bottom-right of circle toward corner
+  // Circle edge at 45°: (cx + r*cos45, cy + r*sin45)
+  const cos45 = Math.SQRT1_2;
+  const hx1 = (cx + r * cos45);
+  const hy1 = (cy + r * cos45);
+  const hx2 = 112 * s;
+  const hy2 = 112 * s;
+
+  ctx.save();
+  if (size >= 48) {
+    ctx.shadowColor = 'rgba(255,255,255,0.55)';
+    ctx.shadowBlur  = 4 * s;
+  }
+  ctx.beginPath();
+  ctx.moveTo(hx1, hy1);
+  ctx.lineTo(hx2, hy2);
+  ctx.strokeStyle = color;
+  ctx.lineWidth   = lw;
+  ctx.lineCap     = 'round';
+  ctx.stroke();
+  ctx.restore();
+
+  // ── ₹ symbol ────────────────────────────────────────
+  if (size >= 48) {
+    const fontSize = Math.round(28 * s);
+    ctx.save();
+    ctx.font          = `bold ${fontSize}px ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif`;
+    ctx.fillStyle     = color;
+    ctx.textAlign     = 'center';
+    ctx.textBaseline  = 'middle';
+    ctx.fillText('₹', cx, cy);
+    ctx.restore();
+  }
+}
+
+// Draw scaled-up preview
+function drawPreview(id, size, displaySize) {
+  const c   = document.getElementById(id);
+  c.width   = displaySize;
+  c.height  = displaySize;
+  const ctx = c.getContext('2d');
+  const off = document.createElement('canvas');
+  drawIcon(off, size);
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = 'high';
+  ctx.drawImage(off, 0, 0, displaySize, displaySize);
+}
+
+function dl(id, filename) {
+  const c   = document.getElementById(id);
+  const a   = document.createElement('a');
+  a.download = filename;
+  a.href     = c.toDataURL('image/png');
+  a.click();
+}
+
+window.addEventListener('load', () => {
+  // Actual-size download canvases
+  drawIcon(document.getElementById('d128'), 128);
+  drawIcon(document.getElementById('d48'),   48);
+  drawIcon(document.getElementById('d16'),   16);
+
+  // Upscaled previews
+  drawPreview('pl128', 128, 128);
+  drawPreview('pl48',   48,  96);
+  drawPreview('pl16',   16,  48);
+  drawPreview('pd128', 128, 128);
+  drawPreview('pd48',   48,  96);
+  drawPreview('pd16',   16,  48);
+});
+</script>

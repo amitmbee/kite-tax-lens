@@ -3,8 +3,19 @@
 holdings-*.xlsx
 holdings-dom.html
 
+# Raw screenshots — contain real portfolio data
+FullPageScreenShot.jpeg
+popup-screeshot.png
+Screenshot*.png
+
+# Build artefacts
+*.zip
+kite-tax-lens-v*/
+
 # Dev dependencies
 node_modules/
-
-# Test tooling — not part of the extension
 package-lock.json
+
+# System
+.DS_Store
+.claude/
