@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Kite Tax Lens",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Tax intelligence overlay for Zerodha Kite Holdings — LT/ST badges, LTCG harvest wizard, SGB tracker.",
   "permissions": ["storage"],
   "host_permissions": [
