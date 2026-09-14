@@ -5,42 +5,44 @@
 1. Open Chrome → `chrome://extensions`
 2. Enable **Developer mode** (top right toggle)
 3. Click **Load unpacked**
-4. Select this folder: `kite-extension/`
+4. Select this repository folder
 
-The extension icon (blue square) appears in the toolbar.
+The extension icon appears in the toolbar.
 
 ## Step 2 — Sync LT data from Console
 
 1. Open `https://console.zerodha.com/portfolio/holdings`
-2. Wait for the page to fully load (the holdings table must be visible)
-3. The extension's content script runs automatically and syncs your LT qty data
-4. Also syncs realized LTCG/STCG for this FY from the Tax P&L API
+2. Wait for the holdings table to fully load
+3. The content script runs automatically and syncs:
+   - LT vs ST quantity split per holding
+   - Realised LTCG / STCG for the current financial year
 
-You only need to do this once per session (or whenever you want fresh data).
+Re-visit Console whenever you want fresh realised P&L figures.
 
 ## Step 3 — Use the overlay on Kite
 
 1. Open `https://kite.zerodha.com/holdings`
-2. The tax panel appears above the holdings table with:
-   - Unrealised LTCG / STCG
-   - Realized LTCG this FY + remaining exemption
-   - Harvest Wizard (exact shares to sell)
-3. Each holding row shows an LT/ST/SGB badge
+2. The tax panel appears above the holdings table showing:
+   - Hero: estimated tax saving available
+   - Harvest wizard: exact stocks and quantities to sell before 31 March
+   - Loss harvesting: LT losses that can offset gains
+   - Free profit limit bar: how much of the ₹1,25,000 LTCG exemption is used
+   - Portfolio at a glance: breakdown by instrument type
+3. Each row in the holdings table shows an LT / ST / SGB / Govt Bond / Commodity ETF badge
+
+## Running tests
+
+```bash
+npm install
+npm test
+```
+
+Tests cover all pure functions in `lib/tax.js` — instrument detection, calcTaxData,
+buildHarvestWizard, FY boundaries, and symbol resolution.
 
 ## Debugging
 
-- Open DevTools → Console on kite.zerodha.com to see any errors
-- Check `chrome.storage.local` in DevTools → Application → Storage to verify Console data synced
-
-## What the Harvest Wizard shows on your portfolio
-
-```
-Remaining LTCG headroom: ₹1,11,997  (₹1,25,000 − ₹13,003 realised)
-
-  Sell 406 shares of TATAPOWER    gain: ₹1,11,902   @ ₹365/sh
-  Sell   1 share  of SILVERIETF  gain: ₹135         @ ₹226/sh
-                                  ─────────────────
-  Total LTCG to realise: ₹1,12,037   ✅ Within exemption
-```
-
-Selling these before March 31 would use your full ₹1,25,000 LTCG exemption tax-free.
+- Open DevTools → Application → Storage → Local Storage on any Kite page to inspect `ktl_console`
+- `console.log` is suppressed by Kite in production; use `document.title = 'debug value'` instead
+- Paste `demo-data.js` in the DevTools console on the Holdings page to inject fake portfolio
+  data for screenshots — refresh to restore real data

@@ -18,4 +18,6 @@ package-lock.json
 
 # System
 .DS_Store
+
+# Claude Code
 .claude/
