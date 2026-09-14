@@ -64,4 +64,10 @@ All data stays on your device. See the full [privacy policy](https://amitmbee.gi
 
 ## Disclaimer
 
-Gain estimates use blended average cost. Holdings acquired before 31 January 2018 use a grandfathered cost basis — actual LTCG may differ. Verify with your Console Tax P&L before making any trading decisions. This extension is not affiliated with or endorsed by Zerodha.
+This extension is for **informational purposes only** and does not constitute financial, tax, or investment advice. Consult a qualified Chartered Accountant or tax professional before making any investment or tax-related decisions.
+
+- Gain estimates use blended average cost. Holdings acquired before 31 January 2018 use a grandfathered cost basis (FMV as of that date) — actual LTCG may differ from what is shown.
+- Tax rates and exemption limits are based on the Finance Act 2023 and July 2024 Union Budget and are subject to change by Parliament. Verify current rates before relying on any figures.
+- This extension is not registered with SEBI and does not provide investment advice. Sell/rebuy suggestions are purely illustrative of tax optimisation mechanics — they are not recommendations to trade any specific security.
+- Always verify your tax liability against your official Zerodha Console Tax P&L report and your ITR before filing.
+- This extension is not affiliated with, endorsed by, or in any way connected to Zerodha Broking Ltd.
