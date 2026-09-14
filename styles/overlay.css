@@ -1,0 +1,397 @@
+/* Kite Tax Lens — overlay styles */
+
+#ktl-panel {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 18px;
+  font-family: -apple-system, "Segoe UI", sans-serif;
+  font-size: 13px;
+  color: #222;
+  box-shadow: 0 2px 8px rgba(0,0,0,.07);
+  overflow: hidden;
+}
+
+/* ── Header ────────────────────────────────────────────── */
+.ktl-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.ktl-logo {
+  font-weight: 700;
+  font-size: 13px;
+  color: #2d6bc4;
+  letter-spacing: .2px;
+}
+
+.ktl-fy {
+  font-size: 11px;
+  color: #888;
+}
+
+/* ── Hero ──────────────────────────────────────────────── */
+.ktl-hero {
+  padding: 14px 18px;
+  background: #eef6ee;
+  border-bottom: 1px solid #d4ecd4;
+}
+
+.ktl-hero-saving {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a6e2e;
+  margin-bottom: 3px;
+}
+
+.ktl-hero-saving strong { font-size: 17px; }
+
+.ktl-hero-sub {
+  font-size: 12px;
+  color: #4a8f5a;
+}
+
+.ktl-hero-done {
+  background: #eef6ee;
+  border-bottom-color: #d4ecd4;
+  color: #1a6e2e;
+  font-weight: 600;
+}
+
+.ktl-hero-neutral {
+  background: #f5f5f5;
+  border-bottom-color: #e0e0e0;
+  color: #888;
+}
+
+/* ── Sections ──────────────────────────────────────────── */
+.ktl-section {
+  padding: 14px 18px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.ktl-section:last-child { border-bottom: none; }
+
+.ktl-section-title {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  color: #999;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+/* ── Action table ──────────────────────────────────────── */
+.ktl-action-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+
+.ktl-action-table th {
+  text-align: left;
+  font-weight: 600;
+  color: #888;
+  font-size: 11px;
+  padding: 4px 8px 6px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.ktl-action-table td {
+  padding: 6px 8px 6px 0;
+  border-bottom: 1px solid #f5f5f5;
+  vertical-align: middle;
+}
+
+.ktl-action-table tfoot td {
+  border-top: 1px solid #eee;
+  border-bottom: none;
+  font-weight: 600;
+  padding-top: 7px;
+}
+
+.ktl-act-sym { font-weight: 700; color: #222; }
+.ktl-act-qty { color: #555; }
+.ktl-act-val { color: #333; }
+.ktl-act-gain { color: #1a6e2e; font-weight: 600; }
+.ktl-act-foot-label { color: #666; }
+.ktl-act-foot { color: #222; }
+
+.ktl-action-tip {
+  font-size: 11px;
+  color: #777;
+  background: #fafafa;
+  border-left: 3px solid #2d6bc4;
+  padding: 7px 10px;
+  border-radius: 0 4px 4px 0;
+  line-height: 1.5;
+}
+
+.ktl-action-tip strong { color: #333; }
+
+/* ── Free limit section ────────────────────────────────── */
+.ktl-limit-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.ktl-limit-used { font-weight: 600; color: #333; }
+.ktl-limit-total { color: #999; }
+
+.ktl-progress-bar {
+  height: 6px;
+  background: #eee;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+
+.ktl-progress-fill {
+  height: 100%;
+  background: #2d6bc4;
+  border-radius: 3px;
+  transition: width .4s ease;
+  min-width: 2px;
+}
+
+.ktl-limit-sub {
+  font-size: 11px;
+  color: #888;
+  margin-bottom: 4px;
+}
+
+.ktl-sync-notice {
+  margin-top: 8px;
+  font-size: 11px;
+  color: #a06000;
+  background: #fff9ec;
+  border: 1px solid #ffd88a;
+  border-radius: 4px;
+  padding: 6px 10px;
+}
+
+.ktl-sync-notice a { color: #2d6bc4; text-decoration: none; font-weight: 600; }
+.ktl-sync-notice a:hover { text-decoration: underline; }
+
+.ktl-stale-notice {
+  margin-top: 8px;
+  font-size: 11px;
+  color: #666;
+  background: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 6px 10px;
+}
+
+.ktl-stale-notice a { color: #2d6bc4; text-decoration: none; font-weight: 600; }
+.ktl-stale-notice a:hover { text-decoration: underline; }
+
+.ktl-wizard-blocked {
+  font-size: 12px;
+  color: #7a3a00;
+  background: #fff3e0;
+  border: 1px solid #ffcc80;
+  border-radius: 5px;
+  padding: 12px 14px;
+  line-height: 1.6;
+}
+
+.ktl-wizard-blocked a { color: #2d6bc4; font-weight: 600; text-decoration: none; }
+.ktl-wizard-blocked a:hover { text-decoration: underline; }
+
+.ktl-hero-warn {
+  background: #fff8e1;
+  border-bottom-color: #ffe082;
+  color: #7a5800;
+  font-weight: 600;
+}
+
+.ktl-act-note {
+  font-size: 10px;
+  font-weight: 400;
+  color: #999;
+  margin-left: 4px;
+}
+
+.ktl-act-loss { color: #c0392b; font-weight: 600; }
+.ktl-act-saving { color: #1a6e2e; font-weight: 600; }
+
+.ktl-loss-intro {
+  font-size: 12px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.ktl-disclaimer {
+  font-size: 10px;
+  color: #aaa;
+  padding: 8px 18px 10px;
+  border-top: 1px solid #f0f0f0;
+  line-height: 1.5;
+}
+
+/* ── At a glance ───────────────────────────────────────── */
+.ktl-glance-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 0;
+  font-size: 12px;
+  border-bottom: 1px solid #f7f7f7;
+}
+
+.ktl-glance-row:last-child { border-bottom: none; }
+
+.ktl-glance-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.ktl-dot-lt   { background: #399e5a; }
+.ktl-dot-st   { background: #e07b00; }
+.ktl-dot-sgb  { background: #5c6bc0; }
+.ktl-dot-loss      { background: #d43d3d; }
+.ktl-dot-gsec      { background: #6a1b9a; }
+.ktl-dot-commodity { background: #b8860b; }
+
+.ktl-glance-label {
+  flex: 0 0 150px;
+  color: #444;
+}
+
+.ktl-glance-val {
+  flex: 0 0 90px;
+  font-weight: 600;
+  color: #333;
+}
+
+.ktl-glance-rate {
+  font-size: 11px;
+  color: #999;
+}
+
+/* ── Utility ───────────────────────────────────────────── */
+.ktl-pos { color: #1a6e2e !important; }
+.ktl-neg { color: #c0392b !important; }
+
+/* ── Row badges ────────────────────────────────────────── */
+.ktl-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 3px;
+  margin-left: 6px;
+  vertical-align: middle;
+  letter-spacing: .2px;
+  white-space: nowrap;
+  cursor: default;
+}
+
+.ktl-lt {
+  background: #e6f4ea;
+  color: #1a6e2e;
+  border: 1px solid #b0d8ba;
+}
+
+.ktl-st {
+  background: #fff3e0;
+  color: #a05000;
+  border: 1px solid #ffc87a;
+}
+
+.ktl-mix {
+  background: #fff8e1;
+  color: #7a5800;
+  border: 1px solid #ffe082;
+}
+
+.ktl-sgb {
+  background: #e8eaf6;
+  color: #3949ab;
+  border: 1px solid #9fa8da;
+}
+
+.ktl-gsec {
+  background: #f3e5f5;
+  color: #6a1b9a;
+  border: 1px solid #ce93d8;
+}
+
+.ktl-commodity {
+  background: #fef9e7;
+  color: #7d6008;
+  border: 1px solid #f9e79f;
+}
+
+/* ── Hero warning variant (no Console sync) ────────────────── */
+.ktl-hero-warn {
+  background: #fff8ec;
+  border-bottom-color: #ffd88a;
+  color: #a06000;
+  font-weight: 600;
+}
+
+/* ── Wizard blocked state ──────────────────────────────────── */
+.ktl-wizard-blocked {
+  font-size: 12px;
+  color: #555;
+  background: #fff9ec;
+  border: 1px solid #ffd88a;
+  border-radius: 4px;
+  padding: 10px 12px;
+  line-height: 1.6;
+}
+
+.ktl-wizard-blocked a { color: #2d6bc4; font-weight: 600; text-decoration: none; }
+.ktl-wizard-blocked a:hover { text-decoration: underline; }
+
+/* ── Stale data notice ─────────────────────────────────────── */
+.ktl-stale-notice {
+  margin-top: 6px;
+  font-size: 11px;
+  color: #a06000;
+  background: #fff9ec;
+  border: 1px solid #ffd88a;
+  border-radius: 4px;
+  padding: 5px 10px;
+}
+
+.ktl-stale-notice a { color: #2d6bc4; text-decoration: none; font-weight: 600; }
+.ktl-stale-notice a:hover { text-decoration: underline; }
+
+/* ── Action table extras ───────────────────────────────────── */
+.ktl-act-note {
+  font-size: 10px;
+  color: #aaa;
+  font-weight: 400;
+}
+
+.ktl-act-loss  { color: #c0392b; font-weight: 600; }
+.ktl-act-saving { color: #1a6e2e; font-weight: 600; }
+
+/* ── Loss harvesting section ───────────────────────────────── */
+.ktl-loss-intro {
+  font-size: 12px;
+  color: #555;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+/* ── Disclaimer footer ─────────────────────────────────────── */
+.ktl-disclaimer {
+  padding: 9px 18px;
+  font-size: 10px;
+  color: #aaa;
+  border-top: 1px solid #f0f0f0;
+  line-height: 1.5;
+}

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 320px;
+      font-family: -apple-system, "Segoe UI", sans-serif;
+      font-size: 13px;
+      color: #333;
+      background: #fff;
+    }
+    .header {
+      background: #2d6bc4;
+      color: #fff;
+      padding: 11px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header-title { font-weight: 600; font-size: 13px; }
+    .header-fy { font-size: 11px; opacity: .75; }
+
+    .section { padding: 11px 16px; border-bottom: 1px solid #f0f0f0; }
+    .section-title {
+      font-size: 10px;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    /* ── Limit bar ── */
+    .limit-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      margin-bottom: 5px;
+    }
+    .limit-used { font-weight: 600; }
+    .limit-total { color: #999; }
+    .progress-bar {
+      height: 5px;
+      background: #eee;
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 4px;
+    }
+    .progress-fill { height: 100%; background: #2d6bc4; border-radius: 3px; }
+    .limit-sub { font-size: 11px; color: #888; }
+
+    /* ── Glance rows ── */
+    .glance-row {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 4px 0;
+      font-size: 12px;
+      border-bottom: 1px solid #f7f7f7;
+    }
+    .glance-row:last-child { border-bottom: none; }
+    .glance-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .dot-lt       { background: #399e5a; }
+    .dot-loss     { background: #d43d3d; }
+    .dot-st       { background: #e07b00; }
+    .dot-sgb      { background: #5c6bc0; }
+    .dot-gsec     { background: #6a1b9a; }
+    .dot-commodity{ background: #b8860b; }
+
+    .glance-label { flex: 1; color: #555; }
+    .glance-val   { font-weight: 600; white-space: nowrap; }
+    .glance-rate  { font-size: 10px; color: #aaa; white-space: nowrap; }
+    .pos { color: #1a6e2e; }
+    .neg { color: #c0392b; }
+
+    /* ── SGB list ── */
+    .sgb-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 3px 0;
+      font-size: 12px;
+      border-bottom: 1px solid #f7f7f7;
+    }
+    .sgb-row:last-child { border-bottom: none; }
+    .sgb-sym { color: #3949ab; font-weight: 600; }
+    .sgb-maturity { color: #888; font-size: 11px; }
+    .sgb-val { color: #555; }
+
+    /* ── States ── */
+    .notice {
+      padding: 9px 16px;
+      font-size: 11px;
+      color: #a06000;
+      background: #fff9ec;
+      border-top: 1px solid #ffd88a;
+    }
+    .notice a { color: #2d6bc4; text-decoration: none; }
+    .footer {
+      padding: 9px 16px;
+      font-size: 11px;
+      color: #aaa;
+      text-align: center;
+    }
+    .footer a { color: #2d6bc4; text-decoration: none; }
+    #loading, #no-data { padding: 20px 16px; text-align: center; color: #999; font-size: 12px; }
+    #no-data a { color: #2d6bc4; }
+
+    /* ── Health status ── */
+    .health-row {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 16px;
+      font-size: 11px;
+      border-top: 1px solid #f0f0f0;
+      color: #666;
+    }
+    .health-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .health-ok   { background: #399e5a; }
+    .health-warn { background: #e07b00; }
+    .health-err  { background: #d43d3d; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <span class="header-title">🍃 Kite Tax Lens</span>
+    <span class="header-fy" id="fy-label">—</span>
+  </div>
+
+  <div id="loading">Loading…</div>
+
+  <div id="no-data" style="display:none">
+    No data yet.<br><br>
+    <a href="https://console.zerodha.com/portfolio/holdings" target="_blank">Sync Console Holdings</a>,
+    then visit
+    <a href="https://kite.zerodha.com/holdings" target="_blank">Kite Holdings</a>.
+  </div>
+
+  <div id="content" style="display:none">
+
+    <div class="section">
+      <div class="section-title">Free Profit Limit (resets every April)</div>
+      <div class="limit-row">
+        <span class="limit-used" id="limit-used">—</span>
+        <span class="limit-total" id="limit-total">limit: ₹1,25,000</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="limit-bar" style="width:0%"></div>
+      </div>
+      <div class="limit-sub" id="limit-sub">—</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Portfolio at a Glance</div>
+      <div id="glance-rows"></div>
+    </div>
+
+    <div class="section" id="sgb-section" style="display:none">
+      <div class="section-title">Sovereign Gold Bonds</div>
+      <div id="sgb-rows"></div>
+    </div>
+
+  </div>
+
+  <div id="health-row" style="display:none"></div>
+
+  <div id="notice-console" class="notice" style="display:none">
+    ⚠️ <a href="https://console.zerodha.com/portfolio/holdings" target="_blank">Open Console Holdings</a> once to sync your LT data and realised LTCG.
+  </div>
+
+  <div class="footer">
+    <a href="https://kite.zerodha.com/holdings" target="_blank">Open Kite Holdings for full overlay →</a>
+  </div>
+
+  <script src="../lib/tax.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

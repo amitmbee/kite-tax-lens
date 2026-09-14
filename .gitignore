@@ -1,0 +1,10 @@
+# Sensitive — never commit
+*.har
+holdings-*.xlsx
+holdings-dom.html
+
+# Dev dependencies
+node_modules/
+
+# Test tooling — not part of the extension
+package-lock.json
